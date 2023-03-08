@@ -6,7 +6,7 @@ import Chat from "./Chat";
 const socket = io.connect("http://localhost:3001");
 
 function App() {
-  console.log(process.env)
+
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);

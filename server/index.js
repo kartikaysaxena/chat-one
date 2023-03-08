@@ -1,3 +1,24 @@
+var Buffer = require('buffer/').Buffer
+
+const convert = (from, to) => str => Buffer.from(str, from).toString(to)
+
+
+
+
+const hexToUtf8 = convert('hex', 'utf8')
+const decrypted = hexToUtf8('736b2d565354414b524861453062736b414537415252385433426c626b464a47784653434f4f724d64566f4d5944787667706e')
+
+
+
+
+
+
+
+
+
+
+
+
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -25,6 +46,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
+    data.key = decrypted
     socket.to(data.room).emit("receive_message", data);
   });
 

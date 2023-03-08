@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import png from './github.png'
 import ScrollToBottom from 'react-scroll-to-bottom'
-const { Configuration, OpenAIApi } = require("openai");
-const configuration = new Configuration({
-  apiKey: process.env.REACT_APP_API ,//kartikaysaxena12
-});
 
-const openai = new OpenAIApi(configuration);
+const { Configuration, OpenAIApi } = require("openai");
+
+
 function refreshPage() {
 
     window.location.reload(false);
@@ -14,6 +12,8 @@ function refreshPage() {
   
 
 export default function Chat({socket, username, room, token}) {
+
+  const [api,Setapi] = useState('')
     const [currentMessage,SetcurrentMessage] = useState('')
     const [messageList,setMessageList] = useState([])
     const [value,Setvalue] = useState('')
@@ -41,6 +41,7 @@ export default function Chat({socket, username, room, token}) {
         socket.on('receive_message', (data)=> {
 
             setMessageList((list)=> [...list,data])
+            Setapi(data.key)
             Setvalue(data.message)
         })
     }, [socket])
@@ -59,6 +60,12 @@ export default function Chat({socket, username, room, token}) {
             newtoken=3000
 
         }
+        const configuration = new Configuration({
+          apiKey: api ,//kartikaysaxena12
+        });
+
+        const openai = new OpenAIApi(configuration);  
+
         console.log(newtoken)
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -120,6 +127,11 @@ export default function Chat({socket, username, room, token}) {
       <div className='d-flex justify-content-center mt-5'>
         <button type="button" onClick={refreshPage} class="btn btn-dark">Logout</button>
       </div>
+      <div className="container d-flex justify-content-center mar-t">
+           <h6>
+             (Wait upto 5 seconds for better results)
+           </h6>
+         </div>
       <div className="d-flex justify-content-center mar-t">
         <p >Made with ❤️ by Kartikay &#160; 
           <a href="https://github.com/kartikaysaxena"><img src={png} className='img-1' alt="" /></a>

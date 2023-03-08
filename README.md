@@ -5,7 +5,7 @@
 
  
 
-An AI enabled chatroom in which multiple people with same room ID can chat together, user can reply to messages using AI by clicking toggle button. Built using CSS, JavaScript , NodeJS, ReactJS. Integrated ChatGPT's API for AI models.
+An AI enabled chatroom in which multiple people with same room ID can chat together, user can reply to messages using AI by clicking toggle button. Built using CSS, JavaScript , NodeJS, ReactJS. Integrated ChatGPT's API for AI models. Open in two tabs and join the same room to test it. Wait for atleast 5 seconds for text generation.
 
 ## How to run
 

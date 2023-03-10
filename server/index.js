@@ -28,6 +28,8 @@ const path = require('path')
 app.use(cors());
 app.use(express.static(path.join(__dirname + "/public")))
 
+const port = process.env.PORT || 3001
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
@@ -55,6 +57,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, () => {
-  console.log("SERVER RUNNING");
+server.listen(port, () => {
+  console.log(`SERVER RUNNING on ${port}`);
 });
